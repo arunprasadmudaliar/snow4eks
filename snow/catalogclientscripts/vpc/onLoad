@@ -1,0 +1,24 @@
+function onLoad() {
+var ga=new GlideAjax('listVPC');	
+	ga.addParam('sysparm_name','listvpc');
+	ga.addParam('sysparm_region', 'us-east-1');
+	ga.getXML(callback);
+	
+	function callback(response)
+	{
+		try{
+			var answer=response.responseXML.documentElement.getAttribute("answer");
+            var object= JSON.parse(answer);
+            for (var i=0;i<object["body"].length;i++){
+                var v = object["body"][i]['vpc'];
+                var l = object["body"][i]['vpc'] +" ("+object["body"][i]['cidr']+")";
+                g_form.addOption('vpc',v,l);
+            }			
+            }catch(err){
+                console.log(err);
+            }
+
+	}
+	
+}
+

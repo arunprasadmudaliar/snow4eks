@@ -1,0 +1,18 @@
+var listVPC = Class.create();
+listVPC.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	listvpc:function()
+	{
+        var region = this.getParameter('sysparm_region');
+        var r = new sn_ws.RESTMessageV2('list_vpc', 'POST');
+        var obj ={'region':region};
+	    r.setRequestBody(JSON.stringify(obj)); 
+        var response = r.execute();
+        var responseBody = response.getBody();
+        var httpStatus = response.getStatusCode();
+        return responseBody;
+    },
+
+    type: 'listVPC',
+	isPublic: true
+});

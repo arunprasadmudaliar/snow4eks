@@ -1,0 +1,16 @@
+try { 
+var r = new sn_ws.RESTMessageV2('create_eks', 'POST');
+	
+var obj ={	
+	'name':current.variables.name.getValue(),
+	'vpc':current.variables.vpc.getValue(),
+	'version':current.variables.version.getValue()
+};
+    r.setRequestBody(JSON.stringify(obj));
+    var response = r.execute();
+    var responseBody = response.getBody();
+    var httpStatus = response.getStatusCode();
+}
+catch(ex) {
+ var message = ex.message;
+}
