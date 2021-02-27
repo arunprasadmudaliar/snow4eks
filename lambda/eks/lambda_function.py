@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     response = client.create_cluster(
         name=name,
         version=version,
-        roleArn='arn:aws:iam::856426095413:role/eksclusterrole',
+        roleArn='<provide arn of a role which has permissions to deploy EKS cluster i.e arn:aws:iam::aws:policy/AmazonEKSClusterPolicy>',
         resourcesVpcConfig={
             'subnetIds':subnets,
         }
@@ -34,7 +34,7 @@ def getsubnets(vpc):
             },
             {
                 'Name':'availabilityZone',
-                'Values':['us-east-1a','us-east-1b']
+                'Values':['us-east-1a','us-east-1b']  #Hardcoded az to avoid deployment in az *-1e since it will fail
             },
         ],
     )
